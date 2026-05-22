@@ -97,7 +97,7 @@ int main(int argc, char** argv){
         }
 
         if (match == false) {
-            cout << "No movies found with prefix "<< prefix << "." << endl;
+            cout << "No movies found with prefix "<< prefix << endl;
         }
 
         sort(matchMovies.begin(), matchMovies.end(), compare);
@@ -108,8 +108,8 @@ int main(int argc, char** argv){
             cout << "Best movie with prefix " << prefix << " is: " << best.first << " with rating " << std::fixed << std::setprecision(1) << best.second << endl;
         }
         else {
-            cout << "No movie with this prefix exists." << endl;
-        }
+            cout << "No movie found with prefix " << prefix << endl;
+        
     }
 
     //  For each prefix,
