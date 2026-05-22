@@ -1,6 +1,6 @@
-// Winter'24
+// Spring '26
 // Instructor: Diba Mirza
-// Student name: 
+// Student name: Andrew Li
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,6 +13,8 @@
 #include <set>
 #include <queue>
 #include <sstream>
+#include <map>
+#include <queue>
 using namespace std;
 
 #include "utilities.h"
@@ -36,10 +38,13 @@ int main(int argc, char** argv){
   
     // Create an object of a STL data-structure to store all the movies
 
+    map<string , double> movieList;
+
     string line, movieName;
     double movieRating;
     // Read each file and store the name and rating
     while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
+        movieList[movieName] = movieRating;
             // Use std::string movieName and double movieRating
             // to construct your Movie objects
             // cout << movieName << " has rating " << movieRating << endl;
@@ -49,6 +54,9 @@ int main(int argc, char** argv){
     movieFile.close();
 
     if (argc == 2){
+        for (auto& movie : movieList) {
+            cout << movie.first << ", " << movie.second << endl;
+        }
             //print all the movies in ascending alphabetical order of movie names
             return 0;
     }
@@ -70,14 +78,48 @@ int main(int argc, char** argv){
     //  For each prefix,
     //  Find all movies that have that prefix and store them in an appropriate data structure
     //  If no movie with that prefix exists print the following message
-    cout << "No movies found with prefix "<<"<replace with prefix>" << endl;
+
+
+    for (auto prefix : prefixes) {
+
+        bool match = false;
+
+        vector<pair<string, double>> matchMovies;
+
+        vector<pair<string, double>> bestMovies;
+
+
+        for (auto& movie : movieList) {
+            if (movie.first.find(prefix) == 0) {
+                matchMovies.push_back(movie);
+                match = true;
+            }
+            else if (movie.first > prefix) {
+                break;
+            }
+            }
+
+        if (match == false) {
+            cout << "No movies found with prefix "<< prefix << "." << endl;
+        }
+
+        sort(matchMovies.begin(), matchMovies.end(), compare);
+
+        for (auto& movie: matchMovies) {
+            bestMovies.push_back({prefix, movie.second});
+        }
+
+        for (auto& bestMovie : bestMovies) {
+            cout << "Best movie with prefix " << prefix << " is: " << bestMovie.first << " with rating " << std::fixed << std::setprecision(1) << bestMovie.second << endl;
+
+        }
+    }
 
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
-    cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
 
     return 0;
-}
+    }
 
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
 
