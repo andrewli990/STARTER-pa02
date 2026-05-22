@@ -102,13 +102,13 @@ int main(int argc, char** argv){
 
         sort(matchMovies.begin(), matchMovies.end(), compare);
 
-        for (auto& movie: matchMovies) {
-            bestMovies.push_back({movie.first, movie.second});
+        if (!matchMovies.empty()) {
+            auto best = matchMovies[0];
+
+            cout << "Best movie with prefix " << prefix << " is: " << best.first << " with rating " << std::fixed << std::setprecision(1) << best.second << endl;
         }
-
-        for (auto& bestMovie : bestMovies) {
-            cout << "Best movie with prefix " << prefix << " is: " << bestMovie.first << " with rating " << std::fixed << std::setprecision(1) << bestMovie.second << endl;
-
+        else {
+            cout << "No movie with this prefix exists." << endl;
         }
     }
 
