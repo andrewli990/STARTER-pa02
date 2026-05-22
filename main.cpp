@@ -112,7 +112,7 @@ int main(int argc, char** argv){
         cout << endl;
     }
         for (auto& [prefix, name, rating]: bestMovies) {
-        cout << "Best movie with prefix " << prefix << " is " << name << " with rating " << rating << endl;
+        cout << "Best movie with prefix " << prefix << " is: " << name << " with rating " << rating << endl;
         }
 
     //  For each prefix,
