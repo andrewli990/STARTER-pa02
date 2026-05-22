@@ -79,15 +79,14 @@ int main(int argc, char** argv){
     //  Find all movies that have that prefix and store them in an appropriate data structure
     //  If no movie with that prefix exists print the following message
 
+    vector<tuple<string, string, double>> bestMovies;
+
 
     for (auto prefix : prefixes) {
 
         bool match = false;
 
         vector<pair<string, double>> matchMovies;
-
-        vector<pair<string, double>> bestMovies;
-
 
         for (auto& movie : movieList) {
             if (movie.first.find(prefix) == 0) {
@@ -97,17 +96,24 @@ int main(int argc, char** argv){
         }
 
         if (match == false) {
-            cout << "No movies found with prefix "<< prefix << endl;
+            cout << "No movies found with prefix "<< prefix;
         }
 
         sort(matchMovies.begin(), matchMovies.end(), compare);
 
-        if (!matchMovies.empty()) {
-            auto best = matchMovies[0];
-
-            cout << "Best movie with prefix " << prefix << " is: " << best.first << " with rating " << std::fixed << std::setprecision(1) << best.second << endl;
+        for (auto& movie: matchMovies) {
+            cout << movie.first << ", " << std::fixed << std::setprecision(1) << movie.second << endl;
         }
+
+        if (!matchMovies.empty()) {
+            bestMovies.push_back({prefix, matchMovies[0].first, matchMovies[0].second});      
+        }
+
+        cout << endl;
     }
+        for (auto& [prefix, name, rating]: bestMovies) {
+        cout << "Best movie with prefix " << prefix << " is " << name << " with rating " << rating << endl;
+        }
 
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
