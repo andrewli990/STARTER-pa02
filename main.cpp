@@ -94,10 +94,7 @@ int main(int argc, char** argv){
                 matchMovies.push_back(movie);
                 match = true;
             }
-            else if (movie.first > prefix) {
-                break;
-            }
-            }
+        }
 
         if (match == false) {
             cout << "No movies found with prefix "<< prefix << "." << endl;
@@ -106,7 +103,7 @@ int main(int argc, char** argv){
         sort(matchMovies.begin(), matchMovies.end(), compare);
 
         for (auto& movie: matchMovies) {
-            bestMovies.push_back({prefix, movie.second});
+            bestMovies.push_back({movie.first, movie.second});
         }
 
         for (auto& bestMovie : bestMovies) {
