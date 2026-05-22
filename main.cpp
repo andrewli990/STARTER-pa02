@@ -88,11 +88,12 @@ int main(int argc, char** argv){
 
         vector<pair<string, double>> matchMovies;
 
-        for (auto& movie : movieList) {
-            if (movie.first.find(prefix) == 0) {
-                matchMovies.push_back(movie);
-                match = true;
-            }
+        auto it = movieList.lower_bound(prefix);
+
+        while (it != movieList.end() && it->first.substr(0, prefix.length()) == prefix) {
+            matchMovies.push_back(*it);
+            match = true;
+            ++it;
         }
 
         if (match == false) {
