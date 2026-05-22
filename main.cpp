@@ -107,9 +107,6 @@ int main(int argc, char** argv){
 
             cout << "Best movie with prefix " << prefix << " is: " << best.first << " with rating " << std::fixed << std::setprecision(1) << best.second << endl;
         }
-        else {
-            cout << "No movie found with prefix " << prefix << endl;
-        
     }
 
     //  For each prefix,
